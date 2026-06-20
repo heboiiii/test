@@ -52,6 +52,16 @@
       font-size: 0.82rem;
       color: var(--text-muted);
     }
+    .post-card.has-image {
+      grid-template-columns: 90px 100px 1fr;
+    }
+    .post-thumb {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: var(--surface-line);
+    }
   </style>
 </head>
 <body>
@@ -75,26 +85,68 @@
     </section>
 
     <section class="page-body shell" style="max-width: 100%;">
-      <div class="post-grid">
-        <article class="post-card">
-          <span class="post-date">JUN 18</span>
-          <span>
-            <h3>Sample post — replace me</h3>
-            <p>This card is a placeholder. Once your database is connected, posts like this will load automatically from there instead of being typed into the HTML.</p>
-          </span>
-        </article>
-        <article class="post-card">
-          <span class="post-date">JUN 10</span>
-          <span>
-            <h3>Another sample post</h3>
-            <p>Each post would have a title, a date, a short summary, and a link to the full entry or embedded video.</p>
-          </span>
-        </article>
+      <div class="post-grid" id="post-grid">
+        <p class="empty-note">Loading posts…</p>
       </div>
-
-      <p class="empty-note">// once your database is wired up, this page will fetch real posts here instead of these two static examples.</p>
     </section>
   </main>
+
+  <!-- Supabase client library, loaded from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    // 1. Paste your own values here — find them in Supabase under
+    //    Project Settings -> Data API
+    const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL_HERE";
+    const SUPABASE_ANON_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function loadPosts() {
+      const grid = document.getElementById("post-grid");
+
+      const { data: posts, error } = await supabase
+        .from("PLAVE")            // <- your table name
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        grid.innerHTML = `<p class="empty-note">Couldn't load posts: ${error.message}</p>`;
+        return;
+      }
+
+      if (!posts || posts.length === 0) {
+        grid.innerHTML = `<p class="empty-note">No posts yet — add one in Supabase and refresh.</p>`;
+        return;
+      }
+
+      grid.innerHTML = posts.map(post => {
+        const date = new Date(post.created_at).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric"
+        }).toUpperCase();
+
+        const thumb = post.image_url
+          ? `<img class="post-thumb" src="${post.image_url}" alt="${post.Title || post.title || ""}">`
+          : "";
+
+        const title = post.Title || post.title || "Untitled";
+        const description = post.Description || post.description || "";
+
+        return `
+          <article class="post-card ${post.image_url ? "has-image" : ""}">
+            <span class="post-date">${date}</span>
+            ${thumb}
+            <span>
+              <h3>${title}</h3>
+              <p>${description}</p>
+            </span>
+          </article>
+        `;
+      }).join("");
+    }
+
+    loadPosts();
+  </script>
 
   <footer class="site-footer">
     <div class="shell">
