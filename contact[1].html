@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Daily Frame — Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .field {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 480px;
+    }
+    .field label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .field input,
+    .field textarea {
+      background: var(--surface);
+      border: 1px solid var(--surface-line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+    .send-btn {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      border-radius: var(--radius);
+      padding: 13px 24px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .send-btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="shell">
+      <a href="index.html" class="brand">The Daily Frame<span class="dot">.</span></a>
+      <nav class="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="posts.html">Posts</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header shell">
+      <p class="eyebrow">00:03 — Contact</p>
+      <h1>Say hello, or pitch a collab.</h1>
+    </section>
+
+    <section class="page-body shell">
+      <p>This form is visual only for now — it doesn't send anywhere yet. Once your backend is connected, submissions here could go straight to your email or database.</p>
+
+      <form id="contact-form" onsubmit="return false;">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button class="send-btn" type="submit">Send message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <span>© 2026 The Daily Frame</span>
+      <span>Built with HTML, CSS &amp; a little JS</span>
+    </div>
+  </footer>
+
+</body>
+</html>

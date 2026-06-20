@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Daily Frame — Posts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .post-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--surface-line);
+      border: 1px solid var(--surface-line);
+      margin-top: 8px;
+    }
+    .post-card {
+      background: var(--bg);
+      padding: 28px 24px;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 24px;
+      align-items: start;
+      transition: background 0.2s ease;
+    }
+    .post-card:hover {
+      background: var(--surface);
+    }
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .post-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin: 0 0 8px;
+    }
+    .post-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .empty-note {
+      margin-top: 32px;
+      padding: 20px;
+      border: 1px dashed var(--surface-line);
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="shell">
+      <a href="index.html" class="brand">The Daily Frame<span class="dot">.</span></a>
+      <nav class="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="posts.html" aria-current="page">Posts</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header shell">
+      <p class="eyebrow">00:01 — Posts</p>
+      <h1>Every entry, newest first.</h1>
+    </section>
+
+    <section class="page-body shell" style="max-width: 100%;">
+      <div class="post-grid">
+        <article class="post-card">
+          <span class="post-date">JUN 18</span>
+          <span>
+            <h3>Sample post — replace me</h3>
+            <p>This card is a placeholder. Once your database is connected, posts like this will load automatically from there instead of being typed into the HTML.</p>
+          </span>
+        </article>
+        <article class="post-card">
+          <span class="post-date">JUN 10</span>
+          <span>
+            <h3>Another sample post</h3>
+            <p>Each post would have a title, a date, a short summary, and a link to the full entry or embedded video.</p>
+          </span>
+        </article>
+      </div>
+
+      <p class="empty-note">// once your database is wired up, this page will fetch real posts here instead of these two static examples.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <span>© 2026 The Daily Frame</span>
+      <span>Built with HTML, CSS &amp; a little JS</span>
+    </div>
+  </footer>
+
+</body>
+</html>
